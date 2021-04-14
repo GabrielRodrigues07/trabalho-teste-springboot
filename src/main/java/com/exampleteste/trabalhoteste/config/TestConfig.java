@@ -9,23 +9,29 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.exampleteste.trabalhoteste.entities.Produto;
-import com.exampleteste.trabalhoteste.repositories.ProdutoRepository;
+import com.exampleteste.trabalhoteste.entities.Item;
+import com.exampleteste.trabalhoteste.entities.Venda;
+import com.exampleteste.trabalhoteste.repositories.VendaRepository;
 
 @Configuration
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
 
 	@Autowired
-	private ProdutoRepository produtoRepository;
+	private VendaRepository vendaRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
 		Locale.setDefault(Locale.US);
-
-		Produto prod1 = new Produto(null, "cadeira", 10.00, Instant.parse("2019-06-20T19:53:07Z"));
-		Produto prod2 = new Produto(null, "sofá", 1000.00, Instant.now());
-
-		produtoRepository.saveAll(Arrays.asList(prod1, prod2));
+		
+		Venda venda = new Venda(null, Instant.now());
+		
+		Item item1 = new Item(null, "Pastel", 10.0);
+		Item item2 = new Item(null, "Refrigerante", 5.0);
+		Item item3 = new Item(null, "Agua", 2.0);
+		
+		venda.getItens().addAll(Arrays.asList(item1, item2, item3));
+		
+		vendaRepository.save(venda);
 	}
 }

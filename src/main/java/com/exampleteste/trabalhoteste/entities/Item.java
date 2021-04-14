@@ -1,17 +1,14 @@
 package com.exampleteste.trabalhoteste.entities;
 
 import java.io.Serializable;
-import java.time.Instant;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.exampleteste.trabalhoteste.entities.dto.ProdutoDTO;
-
 @Entity
-public class Produto extends ProdutoDTO implements Serializable{
+public class Item implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -19,16 +16,15 @@ public class Produto extends ProdutoDTO implements Serializable{
 	private Long id;
 	private String nome;
 	private Double valor;
-	private Instant insercao;
 	
-	public Produto() {
+	public Item() {
 	}
 
-	public Produto(Long id, String nome, Double valor, Instant insercao) {
+	public Item(Long id, String nome, Double valor) {
+		super();
 		this.id = id;
 		this.nome = nome;
 		this.valor = valor;
-		this.insercao = insercao;
 	}
 
 	public Long getId() {
@@ -55,14 +51,6 @@ public class Produto extends ProdutoDTO implements Serializable{
 		this.valor = valor;
 	}
 
-	public Instant getInsercao() {
-		return insercao;
-	}
-
-	public void setInsercao(Instant insercao) {
-		this.insercao = insercao;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -79,7 +67,7 @@ public class Produto extends ProdutoDTO implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Produto other = (Produto) obj;
+		Item other = (Item) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
